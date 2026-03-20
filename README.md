@@ -1,88 +1,103 @@
-# MeaLit-2.0
-MeaLit 2.0 is a web-based food recommendation engine that provides personalized restaurant and recipe recommendations based on user preferences. The application allows users to register and log in to take a preference quiz and receive recommendations based on their answers. MeaLit 2.0 also improves recommendations based on a user's search history.
+# MeaLit — Personalized Food Recommendation Engine
 
-The project is built using HTML, CSS, Bootstrap, JavaScript, Flask, SQLite, and web-scraping tools such as Beautiful Soup and Selenium.
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
+[![ML](https://img.shields.io/badge/ML-Collaborative_Filtering-138808?style=for-the-badge)](https://github.com/ArjunDeshmukh16/MeaLit)
+
+> A web-based food recommendation engine combining **collaborative filtering** and **content-based machine learning** to deliver personalized restaurant and recipe suggestions — adapting to user preferences and search history in real time.
+
+---
+
+## Overview
+
+MeaLit demonstrates end-to-end ML system design: from data scraping and model training through to a user-facing web application. It uses two complementary recommendation approaches:
+
+| Method | How It Works |
+|---|---|
+| **Collaborative Filtering** | Finds users with similar taste profiles and surfaces what they liked |
+| **Content-Based Filtering** | Matches food attributes (cuisine, ingredients, price range) to user preferences |
+| **Hybrid Scoring** | Combines both signals for higher-quality, diverse recommendations |
+
+The system continuously improves as users interact — search history feeds back into the model to refine future suggestions.
+
+---
+
+## Features
+
+- **User authentication** — registration and login with session management
+- **Preference quiz** — cuisine, location, and budget inputs to cold-start recommendations
+- **Restaurant recommendations** — name, cuisine, location, price range, and ratings
+- **Recipe recommendations** — ingredient-based matching with cooking instructions
+- **CRUD operations** — save, categorize, and manage favourite restaurants and recipes
+- **Search history loop** — past interactions improve future recommendation quality
+- **Popular section** — most-liked restaurants and recipes across all users
+- **Web scraping pipeline** — live data via Beautiful Soup and Selenium
+
+---
 
 ## Getting Started
 
+### Local Setup
 
-1. Clone the repository:
-```
- git clone https://github.com/AnushkaBhatnagar/MeaLit-2.0.git
-```
-
-2. Navigate into the project directory
-3. Install the required dependencies: 
-
-```
+```bash
+git clone https://github.com/ArjunDeshmukh16/MeaLit.git
+cd MeaLit
 pip install -r requirements.txt
-```
-4. To run the application, run the following command:
-```
 python app.py
 ```
 
-This will start the Flask development server. You can access the application by navigating to http://localhost:8000/ in your web browser.
+Visit `http://localhost:8000/` in your browser.
 
+### Docker
 
-### OR Install Using Docker
-
-
-1. 
-```
-docker build -t mealit2.0 https://github.com/AnushkaBhatnagar/MeaLit-2.0.git
+```bash
+docker build -t mealit .
+docker run -p 8000:8000 mealit
 ```
 
-2.
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Front-end | HTML, CSS, Bootstrap, JavaScript |
+| Back-end | Python Flask |
+| Database | SQLite |
+| ML | Collaborative filtering, content-based filtering |
+| Scraping | Beautiful Soup, Selenium |
+| Containerization | Docker |
+
+---
+
+## Repository Structure
+
 ```
-docker run -p 8000:8000 mealit2.0
+├── app.py                  # Flask application entry point
+├── models.py               # Database models and ML recommendation logic
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Container config
+├── MeaLitdb.sqlite3        # SQLite database
+├── templates/              # HTML templates (Jinja2)
+├── static/                 # CSS, JS, images
+├── Scraping/               # Web scraping scripts (Beautiful Soup + Selenium)
+└── csv files/              # Training data for recommendation models
 ```
 
+---
 
+## Why This Is Interesting (ML Perspective)
 
-## Features
-- User authentication (registration and login)
-- Preference quiz for personalized recommendations
-- Dynamic restaurant recommendation system
-- Recipe recommendation based on available ingredients
-- Categorization and saving of recommended restaurants and recipes (CRUD operations)
-- Search history-based recommendation improvement
-- Data web-scraping using Beautiful Soup and Selenium
-- User-friendly interface with visually appealing design
+Building a recommendation system from scratch — without using a pre-built recommendation library — requires:
 
-## Description
+1. **User-item matrix construction** from scraped restaurant and recipe data
+2. **Similarity computation** (cosine similarity for content-based; matrix factorization for collaborative)
+3. **Cold-start handling** via the preference quiz (new users have no history)
+4. **Feedback loop** — search history updates the user profile vector in real time
 
-### Register and Login
-To use the MeaLit 2.0 recommendation engine, users must first register and log in. Click on the "Register" button to create an account or "Login" if you already have one.
+This mirrors production ML recommendation systems at scale (Netflix, Spotify, DoorDash).
 
-### Preference Quiz
-After logging in, users will be directed to the preference quiz. The quiz consists of questions related to food preferences such as cuisine, location, and budget. Based on the user's answers, the system will provide restaurant and recipe recommendations tailored to their preferences.
+---
 
-### Restaurant Recommendations
-Once the preference quiz is completed, the user will receive restaurant recommendations based on their answers. The recommendations will include details such as the restaurant's name, cuisine, location, price range, and user ratings. Users can also categorize and save their favorite restaurants for future reference.
-
-### Recipe Recommendations
-Users can also receive recipe recommendations based on the ingredients they have on hand. The recipe recommendations will include the recipe name, ingredients, and cooking instructions.
-
-### Search History and Recommendation Improvement
-MeaLit 2.0 improves recommendations based on a user's search history. The system will keep track of a user's search history and use it to refine future recommendations.
-
-### Popular Recipes and Restaurants
-MeaLit 2.0 includes a "Popular" section that displays the most popular recipes and restaurants among all users. This section provides users with inspiration for their next meal and introduces them to new places to eat and cook.
-
-## Technology Stack
-Quantified Self is built using the following technologies:
-
-Front-end: HTML, CSS, JavaScript, Bootstrap
-
-Back-end: Python Flask
-
-Database: SQLite
-
-Web Scraping: Beautiful Soup, Selenium
-
-## Credits
-
-This project was made by Anushka Bhatnagar and [@Soumya-Vaidya](https://github.com/Soumya-Vaidya).
-
-Recipie Reccomendation System : https://github.com/SaloniGandhi/Recipes-Recommender.git
+**→ [View Portfolio](https://arjundeshmukh16.github.io) · [LinkedIn](https://linkedin.com/in/arjun-deshmukh1609) · [GitHub](https://github.com/ArjunDeshmukh16)**
